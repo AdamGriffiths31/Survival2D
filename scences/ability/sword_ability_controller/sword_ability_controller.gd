@@ -35,7 +35,7 @@ func on_timer_timeout():
 	var sword_instance = sword_ability.instantiate() as SwordAbility
 	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
 	foreground_layer.add_child(sword_instance)
-	sword_instance.hitbox_component.damge = damage
+	sword_instance.hitbox_component.damage = damage
 	
 	sword_instance.global_position = enemies[0].global_position
 	sword_instance.global_position += Vector2.RIGHT.rotated(randf_range(0,TAU)) * 4
@@ -49,4 +49,3 @@ func ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary
 	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
 	$Timer.wait_time = base_wait_time * (1 - percent_reduction)
 	$Timer.start()
-	print($Timer.wait_time)
