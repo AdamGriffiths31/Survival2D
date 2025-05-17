@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cejos6yxw3h1y"]
+
+[ext_resource type="Script" uid="uid://bb4tiw8rayfk5" path="res://scences/component/hit_flash_component.gd" id="1_nwqji"]
+[ext_resource type="Material" uid="uid://c1g2nf8kvmeoa" path="res://scences/component/hit_flash_component_material.tres" id="2_peewj"]
+
+[node name="HitFlashComponent" type="Node"]
+script = ExtResource("1_nwqji")
+hit_flash_material = ExtResource("2_peewj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_peewj")

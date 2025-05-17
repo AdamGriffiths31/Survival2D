@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0tkiefiah00m"]
+[gd_scene load_steps=16 format=3 uid="uid://c0tkiefiah00m"]
 
 [ext_resource type="Script" uid="uid://c33aq25ic0lhu" path="res://scences/game_object/wizard_enemy/wizard_enemy.gd" id="1_by8ep"]
 [ext_resource type="PackedScene" uid="uid://cd5dnvmu83kt7" path="res://scences/component/health_component.tscn" id="1_osuk1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://hxhavyevihm5" path="res://scences/game_object/wizard_enemy.png" id="3_e2ddm"]
 [ext_resource type="PackedScene" uid="uid://d8xjsja5opum" path="res://scences/component/velocity_component.tscn" id="3_rm34x"]
 [ext_resource type="PackedScene" uid="uid://cncbfl1ljtrcu" path="res://scences/component/hurtbox_component.tscn" id="4_nmuvq"]
+[ext_resource type="PackedScene" uid="uid://cejos6yxw3h1y" path="res://scences/component/hit_flash_component.tscn" id="5_1co5u"]
 
 [sub_resource type="Animation" id="Animation_1co5u"]
 length = 0.4
@@ -77,6 +78,33 @@ _data = {
 &"walk": SubResource("Animation_rm34x")
 }
 
+[sub_resource type="Shader" id="Shader_wi7hl"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float lerp_percent : hint_range(0.0, 1.0);
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	vec4 texture_colour = texture(TEXTURE, UV);
+	vec4 final_colour = mix(texture_colour, vec4(1.0,1.0,1.0,texture_colour.a), lerp_percent);
+	COLOR = final_colour;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0njbx"]
+resource_local_to_scene = true
+shader = SubResource("Shader_wi7hl")
+shader_parameter/lerp_percent = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2ddm"]
 radius = 9.0
 
@@ -103,6 +131,11 @@ health_compent = NodePath("../HealthComponent")
 [node name="VelocityComponent" parent="." instance=ExtResource("3_rm34x")]
 max_speed = 60
 acceleration = 20.0
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_1co5u")]
+health_component = NodePath("../HealthComponent")
+sprite = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_0njbx")
 
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("2_nmuvq")]
 health_component = NodePath("../HealthComponent")
