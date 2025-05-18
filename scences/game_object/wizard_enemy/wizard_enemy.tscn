@@ -78,7 +78,7 @@ _data = {
 &"walk": SubResource("Animation_rm34x")
 }
 
-[sub_resource type="Shader" id="Shader_wi7hl"]
+[sub_resource type="Shader" id="Shader_1co5u"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -102,7 +102,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0njbx"]
 resource_local_to_scene = true
-shader = SubResource("Shader_wi7hl")
+shader = SubResource("Shader_1co5u")
 shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2ddm"]
