@@ -1,9 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bthscaer5sqkp"]
+[gd_scene load_steps=19 format=3 uid="uid://bthscaer5sqkp"]
 
 [ext_resource type="Script" uid="uid://bo107ovbqkqb8" path="res://scences/game_object/player/player.gd" id="1_3k8nl"]
 [ext_resource type="Texture2D" uid="uid://bdh5ymhd44su" path="res://scences/game_object/player/player.png" id="2_637lg"]
+[ext_resource type="PackedScene" uid="uid://d8xjsja5opum" path="res://scences/component/velocity_component.tscn" id="2_ig0ot"]
 [ext_resource type="PackedScene" uid="uid://bu7a2w5vmp1vk" path="res://scences/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_k6waf"]
 [ext_resource type="PackedScene" uid="uid://cd5dnvmu83kt7" path="res://scences/component/health_component.tscn" id="2_rtpck"]
+[ext_resource type="PackedScene" uid="uid://dndjweya5hw1p" path="res://scences/component/random_stream_player_2d_component.tscn" id="4_lhrib"]
+[ext_resource type="AudioStream" uid="uid://4sbs6x7sk7ty" path="res://assets/audio/impactMining_000.ogg" id="5_cdeck"]
+[ext_resource type="AudioStream" uid="uid://6hv7xa7st0aw" path="res://assets/audio/impactMining_001.ogg" id="6_p1h8l"]
+[ext_resource type="AudioStream" uid="uid://balbfebjnwynt" path="res://assets/audio/impactMining_002.ogg" id="7_w5adu"]
+[ext_resource type="AudioStream" uid="uid://bd4hs7gvgpdj0" path="res://assets/audio/impactMining_003.ogg" id="8_rups1"]
+[ext_resource type="AudioStream" uid="uid://wsb8cihfmbgr" path="res://assets/audio/impactMining_004.ogg" id="9_22vjr"]
 
 [sub_resource type="Animation" id="Animation_ig0ot"]
 length = 0.001
@@ -113,12 +120,19 @@ collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_3k8nl")
 
+[node name="VelocityComponent" parent="." instance=ExtResource("2_ig0ot")]
+max_speed = 90
+acceleration = 25.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_h7ktr")
 }
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_rtpck")]
+
+[node name="HitRandomStreamPlayer" parent="." instance=ExtResource("4_lhrib")]
+streams = Array[AudioStream]([ExtResource("5_cdeck"), ExtResource("6_p1h8l"), ExtResource("7_w5adu"), ExtResource("8_rups1"), ExtResource("9_22vjr")])
 
 [node name="Abilities" type="Node" parent="."]
 
